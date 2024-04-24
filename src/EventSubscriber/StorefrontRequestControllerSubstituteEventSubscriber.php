@@ -48,6 +48,9 @@ class StorefrontRequestControllerSubstituteEventSubscriber implements EventSubsc
         }
 
         $shopwarePageDetails = ShopwarePageDetails::createFromRequest($request, $this->logger);
+        if ($stylaPage === null) {
+            return;
+        }
         $stylaPage = $this->stylaPagesInteractor->guessPageToReplaceShopwarePage($shopwarePageDetails);
         if (!$stylaPage) {
             return;
